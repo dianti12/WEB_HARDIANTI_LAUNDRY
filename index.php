@@ -187,8 +187,8 @@ if (isset($_POST['login'])) {
                 <div class="card login-card my-5">
                     <div class="card-body p-0">
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block login-image-section">
-                                <img src="./img/logo1.png" alt="Laundry Dianti Logo">
+                            <div class="col-lg-6 d-none d-lg-block login-image-section mt-5">
+                                <img src="./img/cover.jpg" alt="Laundry Dianti Logo">
                             </div>
                             <div class="col-lg-6 login-form-section">
                                 <div class="p-5">
