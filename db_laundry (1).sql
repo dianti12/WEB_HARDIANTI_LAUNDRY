@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2025 at 08:10 AM
+-- Generation Time: Jul 15, 2025 at 10:39 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -195,7 +195,6 @@ CREATE TABLE `type_of_service` (
 --
 
 INSERT INTO `type_of_service` (`id`, `service_name`, `price`, `description`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(22, 'cuci dan gosok', 5000, 'kaos oblong', '2025-06-26 02:59:28', '2025-06-26 02:59:28', 0),
 (23, 'hanya cuci', 4500, 'semua jenis baju', '2025-06-26 03:00:06', '2025-06-26 03:00:06', 0),
 (24, 'Gosok', 5000, 'rapih dan licin', '2025-06-26 03:00:29', '2025-06-26 03:00:29', 0),
 (25, 'laundry Besar', 7000, 'Selimut, Karpet, Mantel, Sprei my love', '2025-06-26 03:01:19', '2025-06-26 03:01:19', 0),

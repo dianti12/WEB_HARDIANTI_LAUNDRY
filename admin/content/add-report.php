@@ -5,15 +5,15 @@ include 'admin/controller/pimpinan-validation.php';
 if (isset($_GET['view'])) {
     // trans order data
     $idView = $_GET['view'];
-    $queryView = mysqli_query($config, "SELECT trans_order.*, customer.customer_name, customer.phone, customer.address FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id WHERE trans_order.id = '$idView'");
+    $queryView = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name, customer.phone, customer.address FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id WHERE trans_order.id = '$idView'");
     $rowView = mysqli_fetch_assoc($queryView);
 
     // trans order detail data
     $orderViewID = $rowView['id'];
-    $queryOrderList = mysqli_query($config, "SELECT trans_order_detail.*, type_of_service.* FROM trans_order_detail LEFT JOIN type_of_service ON trans_order_detail.id_service = type_of_service.id WHERE trans_order_detail.id_order = '$orderViewID'");
+    $queryOrderList = mysqli_query($connection, "SELECT trans_order_detail.*, type_of_service.* FROM trans_order_detail LEFT JOIN type_of_service ON trans_order_detail.id_service = type_of_service.id WHERE trans_order_detail.id_order = '$orderViewID'");
 
     if ($rowView['order_status'] == 1) {
-        $queryViewPickup = mysqli_query($config, "SELECT * FROM trans_laundry_pickup WHERE id_order = '$orderViewID'");
+        $queryViewPickup = mysqli_query($connection, "SELECT * FROM trans_laundry_pickup WHERE id_order = '$orderViewID'");
         $rowViewPickup = mysqli_fetch_assoc($queryViewPickup);
     } else if (isset($_POST['pickup'])) {
         $id_order = $_GET['view'];
@@ -22,26 +22,26 @@ if (isset($_GET['view'])) {
         $pickup_pay = $_POST['pickup_pay'];
         $pickup_change = $_POST['pickup_change'];
 
-        $queryInsertPickup = mysqli_query($config, "INSERT INTO trans_laundry_pickup (id_order, id_customer, pickup_date, pickup_pay, pickup_change) VALUES ('$id_order', '$id_customer', '$pickup_date', '$pickup_pay', '$pickup_change')");
+        $queryInsertPickup = mysqli_query($connection, "INSERT INTO trans_laundry_pickup (id_order, id_customer, pickup_date, pickup_pay, pickup_change) VALUES ('$id_order', '$id_customer', '$pickup_date', '$pickup_pay', '$pickup_change')");
 
         $order_status = $_POST['order_status'];
-        $queryUpdateOrderStatus = mysqli_query($config, "UPDATE trans_order SET order_status = '$order_status' WHERE id = '$id_order'");
+        $queryUpdateOrderStatus = mysqli_query($connection, "UPDATE trans_order SET order_status = '$order_status' WHERE id = '$id_order'");
 
         header("Location:?page=pickup&pickup=success");
         die;
     }
 } else if (isset($_GET['delete'])) {
     $idDelete = $_GET['delete'];
-    $queryDelete = mysqli_query($config, "DELETE FROM trans_order WHERE id='$idDelete'");
-    $queryDeleteDetail = mysqli_query($config, "DELETE FROM trans_order_detail WHERE id_order='$idDelete'");
-    $queryDeletePickup = mysqli_query($config, "DELETE FROM trans_laundry_pickup WHERE id_order = '$idDelete'");
+    $queryDelete = mysqli_query($connection, "DELETE FROM trans_order WHERE id='$idDelete'");
+    $queryDeleteDetail = mysqli_query($connection, "DELETE FROM trans_order_detail WHERE id_order='$idDelete'");
+    $queryDeletePickup = mysqli_query($connection, "DELETE FROM trans_laundry_pickup WHERE id_order = '$idDelete'");
     header("Location:?page=pickup&delete=success");
     die;
 }
 
 
-$queryService = mysqli_query($config, "SELECT * FROM type_of_service");
-$queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
+$queryService = mysqli_query($connection, "SELECT * FROM type_of_service");
+$queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
 
 ?>
 

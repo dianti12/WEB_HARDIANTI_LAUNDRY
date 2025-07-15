@@ -1,9 +1,8 @@
 <?php
-$hostname     = "localhost";
-$hostusername = "root";
-$hostpassword = "";
-$hostdatabase = "db_laundry";
-$config = mysqli_connect($hostname, $hostusername, $hostpassword, $hostdatabase);
-if (!$config) {
-    echo "Koneksi gagal";
+
+$connection = mysqli_connect("localhost", "root", "", "db_laundry_dianti");
+
+if (!$connection) {
+    echo "Unable to connect";
+    die;
 }

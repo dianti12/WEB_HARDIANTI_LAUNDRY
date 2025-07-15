@@ -1,4 +1,9 @@
 <?php
 session_start();
 session_destroy();
-header("Location: index.php?logout=berhasil");
+header('location:login.php')
+
+
+
+
+?>

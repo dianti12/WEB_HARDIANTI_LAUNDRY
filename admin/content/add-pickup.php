@@ -5,15 +5,15 @@ include 'admin/controller/operator-validation.php';
 if (isset($_GET['view'])) {
     // trans order data
     $idView = $_GET['view'];
-    $queryView = mysqli_query($config, "SELECT trans_order.*, customer.customer_name, customer.phone, customer.address FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id WHERE trans_order.id = '$idView'");
+    $queryView = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name, customer.phone, customer.address FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id WHERE trans_order.id = '$idView'");
     $rowView = mysqli_fetch_assoc($queryView);
 
     // trans order detail data
     $orderViewID = $rowView['id'];
-    $queryOrderList = mysqli_query($config, "SELECT trans_order_detail.*, type_of_service.* FROM trans_order_detail LEFT JOIN type_of_service ON trans_order_detail.id_service = type_of_service.id WHERE trans_order_detail.id_order = '$orderViewID'");
+    $queryOrderList = mysqli_query($connection, "SELECT trans_order_detail.*, type_of_service.* FROM trans_order_detail LEFT JOIN type_of_service ON trans_order_detail.id_service = type_of_service.id WHERE trans_order_detail.id_order = '$orderViewID'");
 
     if ($rowView['order_status'] == 1) {
-        $queryViewPickup = mysqli_query($config, "SELECT * FROM trans_laundry_pickup WHERE id_order = '$orderViewID'");
+        $queryViewPickup = mysqli_query($connection, "SELECT * FROM trans_laundry_pickup WHERE id_order = '$orderViewID'");
         $rowViewPickup = mysqli_fetch_assoc($queryViewPickup);
     } else if (isset($_POST['pickup'])) {
         $id_order = $_GET['view'];
@@ -22,26 +22,26 @@ if (isset($_GET['view'])) {
         $pickup_pay = $_POST['pickup_pay'];
         $pickup_change = $_POST['pickup_change'];
 
-        $queryInsertPickup = mysqli_query($config, "INSERT INTO trans_laundry_pickup (id_order, id_customer, pickup_date) VALUES ('$id_order', '$id_customer', '$pickup_date')");
+        $queryInsertPickup = mysqli_query($connection, "INSERT INTO trans_laundry_pickup (id_order, id_customer, pickup_date) VALUES ('$id_order', '$id_customer', '$pickup_date')");
 
         $order_status = $_POST['order_status'];
-        $queryUpdateOrderStatus = mysqli_query($config, "UPDATE trans_order SET order_status = '$order_status', order_pay='$pickup_pay', order_change='$pickup_change' WHERE id = '$id_order'");
+        $queryUpdateOrderStatus = mysqli_query($connection, "UPDATE trans_order SET order_status = '$order_status', order_pay='$pickup_pay', order_change='$pickup_change' WHERE id = '$id_order'");
 
         header("Location:?page=pickup&pickup=success");
         die;
     }
 } else if (isset($_GET['delete'])) {
     $idDelete = $_GET['delete'];
-    $queryDelete = mysqli_query($config, "DELETE FROM trans_order WHERE id='$idDelete'");
-    $queryDeleteDetail = mysqli_query($config, "DELETE FROM trans_order_detail WHERE id_order='$idDelete'");
-    $queryDeletePickup = mysqli_query($config, "DELETE FROM trans_laundry_pickup WHERE id_order = '$idDelete'");
+    $queryDelete = mysqli_query($connection, "DELETE FROM trans_order WHERE id='$idDelete'");
+    $queryDeleteDetail = mysqli_query($connection, "DELETE FROM trans_order_detail WHERE id_order='$idDelete'");
+    $queryDeletePickup = mysqli_query($connection, "DELETE FROM trans_laundry_pickup WHERE id_order = '$idDelete'");
     header("Location:?page=pickup&delete=success");
     die;
 }
 
 
-$queryService = mysqli_query($config, "SELECT * FROM type_of_service");
-$queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
+$queryService = mysqli_query($connection, "SELECT * FROM type_of_service");
+$queryCustomer = mysqli_query($connection,  "SELECT * FROM customer");
 
 ?>
 
@@ -50,25 +50,21 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
     <div class="col-sm-6">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Data Order</h4>
+                <h4>Data Pemesanan</h4>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped table-responsive">
                     <tbody>
                         <tr>
-                            <th scope="row">Order Code</th>
-                            <td><?= isset($rowView['order_code']) ? $rowView['order_code'] : '-' ?></td>
-                        </tr>
-                        <tr>
-                            <th scope="row">Order Start Date</th>
+                            <th scope="row">Waktu Pemesanan</th>
                             <td><?= isset($rowView['order_date']) ? $rowView['order_date'] : '-' ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Order End Date</th>
+                            <th scope="row">Pesanan Selesai</th>
                             <td><?= isset($rowView['order_end_date']) ? $rowView['order_end_date'] : '-' ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Order Status</th>
+                            <th scope="row">Status Pesanan</th>
                             <?php $status = getOrderStatus($rowView['order_status']) ?>
                             <td><?= $status ?></td>
                         </tr>
@@ -80,22 +76,22 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
     <div class="col-sm-6">
         <div class="card shadow">
             <div class="card-header">
-                <h4>Data Customer</h4>
+                <h4>Data Pelanggan</h4>
             </div>
             <div class="card-body">
                 <table class="table table-bordered table-striped table-responsive">
                     <tbody>
                         <tr>
-                            <th scope="row">Customer Name</th>
+                            <th scope="row">Nama Pelanggan</th>
                             <td><?= isset($rowView['customer_name']) ? $rowView['customer_name'] : '-' ?>
                             </td>
                         </tr>
                         <tr>
-                            <th scope="row">Phone Number</th>
+                            <th scope="row">No. Telepon</th>
                             <td><?= isset($rowView['phone']) ? $rowView['phone'] : '-' ?></td>
                         </tr>
                         <tr>
-                            <th scope="row">Address</th>
+                            <th scope="row">Alamat</th>
                             <td><?= isset($rowView['address']) ? $rowView['address'] : '-' ?></td>
                         </tr>
                     </tbody>
@@ -107,13 +103,13 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
 <form action="" method="post">
     <div class="card shadow mt-3">
         <div class="card-header">
-            <h4>Order List</h4>
+            <h4>List Pemesanan</h4>
         </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group mb-3">
-                        <label for="" class="form-label">Pickup Date</label>
+                        <label for="" class="form-label">Tanggal Pengambilan Barang</label>
                         <input type="date" class="form-control" name="pickup_date"
                             value="<?= $rowView['order_status'] == 1 ? $rowViewPickup['pickup_date'] : '' ?>"
                             <?= $rowView['order_status'] == 1 ? 'readonly' : '' ?> required>
@@ -123,10 +119,10 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
             <table class="table table-striped table-responsive table-bordered">
                 <thead>
                     <tr>
-                        <th>Service Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Subtotal</th>
+                        <th>Jenis Layanan</th>
+                        <th>Harga</th>
+                        <th>Berat/kg</th>
+                        <th>Total Semua </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -153,13 +149,13 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
                         <input type="hidden" id="total_price_pickup" value="<?= $rowView['total_price'] ?>">
                     </tr>
                     <tr>
-                        <td colspan="3" align="right"><strong>Amount Pay</strong></td>
+                        <td colspan="3" align="right"><strong>Tagihan Yang Dibayar</strong></td>
                         <?php if ($rowView['order_status'] == 0): ?>
                             <td>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">Rp</span>
                                     <input type="number" name="pickup_pay" id="pickup_pay" class="form-control"
-                                        placeholder="Enter amount pay" required>
+                                        placeholder="Masukkan Jumlah Uang Yang Dibayar" required>
                                 </div>
                             </td>
                         <?php elseif ($rowView['order_status'] == 1) : ?>
@@ -167,7 +163,7 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
                         <?php endif ?>
                     </tr>
                     <tr>
-                        <td colspan="3" align="right"><strong>Amount Change</strong></td>
+                        <td colspan="3" align="right"><strong>Kembalian</strong></td>
                         <?php if ($rowView['order_status'] == 0): ?>
                             <td>
                                 <input type="text" class="form-control" id="pickup_change_formatted"
@@ -182,11 +178,11 @@ $queryCustomer = mysqli_query($config,  "SELECT * FROM customer");
             </table>
             <input type="hidden" name="order_status" value="1">
             <div class="mt-3 gap-3" align="right">
-                <a href="?page=pickup" class="btn btn-secondary">Back</a>
+                <a href="?page=add-transaksi" class="btn btn-secondary">Kembali</a>
                 <?php if ($rowView['order_status'] == 0): ?>
-                    <button class="btn btn-primary" name="pickup" type="submit">Pickup</button>
+                    <button class="btn btn-primary" name="pickup" type="submit">Bayar</button>
                 <?php elseif ($rowView['order_status'] == 1): ?>
-                    <a href="content/misc/print.php?order=<?= $_GET['view'] ?>" target="_blank"
+                    <a href="admin/content/misc/print.php?order=<?= $_GET['view'] ?>" target="_blank"
                         class="btn btn-primary">Print</a>
                 <?php endif ?>
             </div>

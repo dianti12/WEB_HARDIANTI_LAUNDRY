@@ -4,12 +4,12 @@ include 'admin/controller/administrator-validation.php';
 
 if (isset($_GET['delete'])) {
     $idDelete = $_GET['delete'];
-    $query = mysqli_query($config, "DELETE FROM user WHERE id='$idDelete'");
+    $query = mysqli_query($connection, "DELETE FROM user WHERE id='$idDelete'");
     header("Location: ?page=user&delete=success");
     die;
 } else if (isset($_GET['edit'])) {
     $idEdit = $_GET['edit'];
-    $queryEdit = mysqli_query($config, "SELECT * FROM user WHERE id='$idEdit'");
+    $queryEdit = mysqli_query($connection, "SELECT * FROM user WHERE id='$idEdit'");
     $rowEdit = mysqli_fetch_assoc($queryEdit);
     if (isset($_POST['edit'])) {
         $username = $_POST['username'];
@@ -17,7 +17,7 @@ if (isset($_GET['delete'])) {
         $password = $_POST['password'] ? $_POST['password'] : $rowEdit['password'];
         $id_level = $_POST['id_level'];
 
-        $queryEdit = mysqli_query($config, "UPDATE user SET username='$username', email='$email', password='$password', id_level='$id_level' WHERE id='$idEdit'");
+        $queryEdit = mysqli_query($connection, "UPDATE user SET username='$username', email='$email', password='$password', id_level='$id_level' WHERE id='$idEdit'");
         header("Location: ?page=user&edit=success");
         die;
     }
@@ -27,17 +27,17 @@ if (isset($_GET['delete'])) {
     $password = $_POST['password'];
     $id_level = $_POST['id_level'];
 
-    $queryAdd = mysqli_query($config, "INSERT INTO user (username, email, password, id_level) VALUES ('$username', '$email', '$password', '$id_level')");
+    $queryAdd = mysqli_query($connection, "INSERT INTO user (username, email, password, id_level) VALUES ('$username', '$email', '$password', '$id_level')");
     header("Location: ?page=user&add=success");
     die;
 }
 
-$queryLevel = mysqli_query($config, "SELECT * FROM level");
+$queryLevel = mysqli_query($connection, "SELECT * FROM level");
 ?>
 
 <div class="card shadow">
     <div class="card-header">
-        <h3><?= isset($_GET['edit']) ? 'Edit' : 'Add' ?> User</h3>
+        <h5><?= isset($_GET['edit']) ? 'Edit' : 'Add' ?> User</h5>
     </div>
     <div class="card-body">
         <form action="" method="post">
@@ -64,7 +64,7 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level");
                     </select>
                 </div>
                 <div class="col-sm-6 form-group mb-3 form-password-toggle">
-                    <label for="" class="form-label">Password</label>
+                    <label for="" class="form-label">Password Baru (opsional)</label>
                     <div class="input-group input-group-merge">
                         <input type="password" id="password" class="form-control" name="password"
                             placeholder="Enter password" aria-describedby="password" />
@@ -72,11 +72,11 @@ $queryLevel = mysqli_query($config, "SELECT * FROM level");
                     </div>
                 </div>
             </div>
-            <div class="" align="right">
-                <a href="?page=user" class="btn btn-secondary">Back</a>
-                <button type="submit" class="btn btn-primary"
+            <div class="" align="left">
+                <a href="?page=user" class="btn btn-secondary btn-sm">Kembali</a>
+                <button type="submit" class="btn btn-primary btn-sm"
                     name="<?php echo isset($_GET['edit']) ? 'edit' : 'add' ?>">
-                    <?php echo isset($_GET['edit']) ? 'Edit' : 'Add' ?>
+                    <?php echo isset($_GET['edit']) ? 'Simpan' : 'Add' ?>
                 </button>
             </div>
         </form>

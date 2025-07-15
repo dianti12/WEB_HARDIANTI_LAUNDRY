@@ -11,7 +11,7 @@ if (empty($_SESSION['id'])) {
 
 // getting account data
 $idNav = $_SESSION['id'];
-$queryNav = mysqli_query($config, "SELECT user.*, level.level_name FROM user LEFT JOIN level ON user.id_level = level.id WHERE user.id = '$idNav'");
+$queryNav = mysqli_query($connection, "SELECT user.*, level.level_name FROM user LEFT JOIN level ON user.id_level = level.id WHERE user.id = '$idNav'");
 $rowNav  = mysqli_fetch_array($queryNav);
 
 ?>

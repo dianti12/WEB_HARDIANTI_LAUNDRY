@@ -2,7 +2,7 @@
 require_once 'admin/controller/koneksi.php';
 include 'admin/controller/operator-validation.php';
 
-$queryData = mysqli_query($config, "SELECT trans_order.*, customer.customer_name FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id ORDER BY trans_order.order_status DESC, trans_order.updated_at DESC")
+$queryData = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name FROM trans_order LEFT JOIN customer ON trans_order.id_customer = customer.id ORDER BY trans_order.order_status DESC, trans_order.updated_at DESC")
 ?>
 <div class="card shadow">
     <div class="card-header">

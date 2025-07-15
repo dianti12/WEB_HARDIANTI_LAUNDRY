@@ -2,14 +2,14 @@
 include '../../controller/koneksi.php';
 
 $id = isset($_GET['order']) ? $_GET['order'] : '';
-$queryOrder = mysqli_query($config, "SELECT trans_order.*, customer.customer_name , trans_laundry_pickup.pickup_date 
+$queryOrder = mysqli_query($connection, "SELECT trans_order.*, customer.customer_name , trans_laundry_pickup.pickup_date 
 FROM trans_order 
 LEFT JOIN trans_laundry_pickup ON trans_order.id = trans_laundry_pickup.id_order 
 LEFT JOIN customer ON trans_order.id_customer = customer.id
 WHERE trans_order.id = '$id'");
 $dataOrder = mysqli_fetch_assoc($queryOrder);
 
-$queryOrderDetail = mysqli_query($config, "SELECT trans_order_detail.*, type_of_service.service_name, type_of_service.price 
+$queryOrderDetail = mysqli_query($connection, "SELECT trans_order_detail.*, type_of_service.service_name, type_of_service.price 
 FROM trans_order_detail 
 LEFT JOIN type_of_service ON trans_order_detail.id_service = type_of_service.id
 WHERE id_order = '$id'");
@@ -22,8 +22,8 @@ WHERE id_order = '$id'");
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laundry Dianti</title>
-    <link rel="icon" type="png" href="/img">
+    <title>Laundry App</title>
+    <link rel="icon" type="image/png" href="../../img/logo/logo3.png">
 
     <style>
         body {
@@ -144,10 +144,10 @@ WHERE id_order = '$id'");
 <body>
     <div class="struct">
         <div class="struct-header">
-            <img src="https://www.google.com/imgres?q=laundry%20logo&imgurl=https%3A%2F%2Fcdn.vectorstock.com%2Fi%2F1000v%2F53%2F97%2Flaundry-logo-icon-vector-31095397.jpg&imgrefurl=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Flaundry-logo-icon-vector-31095397&docid=O3JrRsNGz0ddNM&tbnid=_ywXi4TwShUnQM&vet=12ahUKEwiFhKiZ9YuOAxVFzjgGHS-ZCuYQM3oFCIUBEAA..i&w=964&h=1080&hcb=2&ved=2ahUKEwiFhKiZ9YuOAxVFzjgGHS-ZCuYQM3oFCIUBEAA" alt="Laundry dianti" width="50px">
-            <p><strong>Laundry Dianti</strong></p>
-            <p>jl.Hj.Tuti Alawiyah, Buncit</p>
-            <p>08993939939</p>
+            <img src="" alt="" width="50px">
+            <p><strong>Laundry App</strong></p>
+            <p>Jl.Tb. Simatupang, RT.011, RW.002, Kel. Susukan, Kec. Ciracas, Jakarta Timur</p>
+            <p>0818-0818-0818</p>
         </div>
         <br>
         <div class="order-details">

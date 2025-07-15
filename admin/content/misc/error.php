@@ -1,123 +1,27 @@
 <!DOCTYPE html>
-
-<!-- =========================================================
-* Sneat - Bootstrap 5 HTML Admin Template - Pro | v1.0.0
-==============================================================
-
-* Product Page: https://themeselection.com/products/sneat-bootstrap-html-admin-template/
-* Created by: ThemeSelection
-* License: You must have a valid license purchased in order to legally use the theme for your project.
-* Copyright ThemeSelection (https://themeselection.com)
-
-=========================================================
- -->
-<!-- beautify ignore:start -->
-<html
-  lang="en"
-  class="light-style"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="../../assets/admin/assets/"
-  data-template="vertical-menu-template-free">
+<html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-  <title>Laundry Faith</title>
-
-  <meta name="description" content="" />
-
-  <!-- Favicon -->
-  <link
-    rel="icon"
-    type="image/x-icon"
-    href="../../assets/admin/assets/img/favicon/favicon.ico" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
-    rel="stylesheet" />
-
-  <!-- Icons. Uncomment required icon fonts -->
-  <link rel="stylesheet" href="../../assets/admin/assets/vendor/fonts/boxicons.css" />
-
-  <!-- Core CSS -->
-  <link
-    rel="stylesheet"
-    href="../../assets/admin/assets/vendor/css/core.css"
-    class="template-customizer-core-css" />
-  <link
-    rel="stylesheet"
-    href="../../assets/admin/assets/vendor/css/theme-default.css"
-    class="template-customizer-theme-css" />
-  <link rel="stylesheet" href="../../assets/admin/assets/css/demo.css" />
-
-  <!-- Vendors CSS -->
-  <link
-    rel="stylesheet"
-    href="../../assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-
-  <!-- Page CSS -->
-  <!-- Page -->
-  <link rel="stylesheet" href="../../assets/admin/assets/vendor/css/pages/page-misc.css" />
-  <!-- Helpers -->
-  <script src="../../assets/admin/assets/vendor/js/helpers.js"></script>
-
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-  <script src="../../assets/admin/assets/js/config.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="admin/inc/style.css">
 </head>
 
 <body>
-  <!-- Content -->
-
-  <!-- Error -->
-  <div class="container-xxl container-p-y">
-    <div class="misc-wrapper">
-      <h2 class="mb-2 mx-2">Page Not Found :(</h2>
-      <p class="mb-4 mx-2">
-        Oops! 😖 The requested URL was not found on this server.
-      </p>
-      <a href="../../index.php" class="btn btn-primary">Back to home</a>
-      <div class="mt-3">
-        <img
-          src="../../assets/admin/assets/img/illustrations/page-misc-error-light.png"
-          alt="page-misc-error-light"
-          width="500"
-          class="img-fluid"
-          data-app-dark-img="illustrations/page-misc-error-dark.png"
-          data-app-light-img="illustrations/page-misc-error-light.png" />
+  <div class="custom-bg text-dark">
+    <div class="d-flex align-items-center justify-content-center min-vh-100 px-2">
+      <div class="text-center">
+        <h1 class="display-1 fw-bold">404</h1>
+        <img src="https://cdn0-production-images-kly.akamaized.net/92WxLh5DeexEKXq8dV_gIeEriC4=/640x360/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/822594/original/005771500_1425548779-meet-jokowi-indonesias-probable-next-president.jpg" alt="">
+        <p class="fs-2 fw-medium mt-4">Oops! Page not found</p>
+        <p class="mt-4 mb-5">The page you're looking for doesn't exist or has been moved.</p>
+        <a href="/" class="btn btn-light fw-semibold rounded-pill px-4 py-2 custom-btn">
+          Go Home
+        </a>
       </div>
     </div>
   </div>
-  <!-- /Error -->
-
-  <!-- / Content -->
-
-  <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
-  <script src="../../assets/admin/assets/vendor/libs/jquery/jquery.js"></script>
-  <script src="../../assets/admin/assets/vendor/libs/popper/popper.js"></script>
-  <script src="../../assets/admin/assets/vendor/js/bootstrap.js"></script>
-  <script src="../../assets/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-
-  <script src="../../assets/admin/assets/vendor/js/menu.js"></script>
-  <!-- endbuild -->
-
-  <!-- Vendors JS -->
-
-  <!-- Main JS -->
-  <script src="../../assets/admin/assets/js/main.js"></script>
-
-  <!-- Page JS -->
-
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>
