@@ -32,9 +32,11 @@ $statsActive = mysqli_fetch_assoc($queryActiveOrders);
 $activeOrders = $statsActive['active_orders'] ?? 0;
 
 // Menghitung Pesanan Selesai (delivered)
-$queryCompletedOrders = mysqli_query($connection, "SELECT COUNT(*) AS completed_orders FROM trans_order WHERE order_status = 'delivered'");
-$statsCompleted = mysqli_fetch_assoc($queryCompletedOrders);
-$completedOrders = $statsCompleted['completed_orders'] ?? 0;
+$queryCompletedOrders = mysqli_query($connection, "SELECT * FROM trans_order WHERE order_status = '1'");
+$jml = mysqli_num_rows($queryCompletedOrders);
+// $statsCompleted = mysqli_fetch_assoc($queryCompletedOrders);
+// $completedOrders = $statsCompleted['completed_orders'] ?? 0;
+$completedOrders = $jml;
 ?>
 
 <!DOCTYPE html>
@@ -231,6 +233,7 @@ $completedOrders = $statsCompleted['completed_orders'] ?? 0;
             <p>Data User (Karyawan)</p>
           </div>
         </div>
+
 
         <div class="col-md-4 col-sm-6 mb-4">
           <div class="dashboard-card">
